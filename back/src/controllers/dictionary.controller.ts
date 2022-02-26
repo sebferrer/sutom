@@ -9,6 +9,7 @@ export class DictionaryController {
                 conn.query("SELECT * FROM `Word` LIMIT 10")
                     .then((rows) => {
                         response.send(rows);
+                        conn.end();
                     })
                     .catch(error => {
                         console.log(error);
@@ -30,6 +31,7 @@ export class DictionaryController {
                     "AND substring('" + word + "', 1, 1) = W.FirstLetter")
                     .then((rows) => {
                         response.send(rows[0]);
+                        conn.end();
                     })
                     .catch(error => {
                         console.log(error);
@@ -51,6 +53,7 @@ export class DictionaryController {
                     "AND substring('" + word + "', 1, 1) = W.FirstLetter")
                     .then((rows) => {
                         response.send(rows);
+                        conn.end();
                     })
                     .catch(error => {
                         console.log(error);
