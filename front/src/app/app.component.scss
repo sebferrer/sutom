@@ -1,0 +1,21 @@
+mat-toolbar {
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 4rem;
+    background-color: #124191;
+}
+
+.menu-button-wrapper {
+    width: 100%;
+    color: white;
+}
+
+#head-title {
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+}
