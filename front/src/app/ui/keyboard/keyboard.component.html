@@ -1,0 +1,10 @@
+<div id="keyboard-container">
+
+    <div *ngFor="let row of keys" class="row">
+        <div *ngFor="let key of row" [ngClass]="key === 'back' || key === 'enter' ? 'custom-key' : 'squared-key'"
+            (click)="sendKey(key)">
+            {{ key }}
+        </div>
+    </div>
+
+</div>

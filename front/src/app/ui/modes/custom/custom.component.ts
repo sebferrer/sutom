@@ -22,6 +22,10 @@ export class CustomComponent implements OnInit {
 		console.log(decrypt(cypheredWord));
 	}
 
+	public sendLetter(event: any): void {
+		console.log(event);
+	}
+
 	public ngOnInit(): void {
 	}
 }

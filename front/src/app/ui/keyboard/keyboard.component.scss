@@ -1,0 +1,33 @@
+#keyboard-container {
+    margin-top: 6rem;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    display: block;
+
+    .squared-key {
+        text-transform: uppercase;
+        display: inline-block;
+        font-size: 2rem;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .custom-key {
+        text-transform: capitalize;
+        display: inline-block;
+        font-size: 2rem;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        height: 2rem;
+    }
+}

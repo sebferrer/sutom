@@ -22,13 +22,15 @@ import { WordsService } from './infra';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomComponent } from './ui/modes/custom';
 import { WordGridComponent } from './ui/word-grid';
+import { KeyboardComponent } from './ui/keyboard';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
 		CustomComponent,
-		WordGridComponent
+		WordGridComponent,
+		KeyboardComponent
 	],
 	imports: [
 		BrowserModule,
