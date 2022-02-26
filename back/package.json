@@ -1,0 +1,32 @@
+{
+  "name": "sutom",
+  "version": "0.0.1",
+  "description": "Sutom",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev src/server.ts",
+    "release": "ts-node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebferrer/sutom.git"
+  },
+  "author": "",
+  "license": "BSD 3-Clause",
+  "bugs": {
+    "url": "https://github.com/sebferrer/sutom/issues"
+  },
+  "homepage": "https://github.com/sebferrer/sutom#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mariadb": "^2.5.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  }
+}
