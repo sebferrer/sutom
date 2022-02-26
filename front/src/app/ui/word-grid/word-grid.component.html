@@ -1,3 +1,14 @@
 <div id="container">
     WORD GRID
+    {{ nbLetters }} {{ firstLetter }}
+
+    <table>
+        <tr *ngFor="let row of grid">
+            <td *ngFor="let cell of row" class="grid-cell">
+                <div class="cell-container">
+                    <p>{{ cell }}</p>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
