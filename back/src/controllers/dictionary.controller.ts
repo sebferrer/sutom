@@ -69,7 +69,7 @@ export class DictionaryController {
         database.pool.getConnection()
             .then(conn => {
                 let word = request.params.word;
-                conn.query("SELECT COUNT(*) FROM Word WHERE Label='" + word + "'")
+                conn.query("SELECT COUNT(*) AS `exists` FROM dictionary.Word WHERE Label='" + word + "'")
                     .then((rows) => {
                         response.send(rows[0]);
                         conn.end();
