@@ -23,6 +23,7 @@ export class CustomComponent implements OnInit {
 	}
 
 	public sendLetter(event: any): void {
+		console.log('sendLetter');
 		console.log(event);
 	}
 

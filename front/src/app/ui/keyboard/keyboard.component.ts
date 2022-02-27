@@ -18,11 +18,10 @@ export class KeyboardComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.keyPressed = new EventEmitter();
 		this.keys = [];
 		this.keys.push(['a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']);
 		this.keys.push(['q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm']);
-		this.keys.push(['back', 'w', 'x', 'c', 'v', 'b', 'enter']);
+		this.keys.push(['back', 'w', 'x', 'c', 'v', 'b', 'n', 'enter']);
 	}
 
 	public sendKey(key: string) {
