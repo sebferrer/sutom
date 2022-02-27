@@ -65,4 +65,23 @@ export class DictionaryController {
             });
     }
 
+    public checkWord(request: Request, response: Response) {
+        database.pool.getConnection()
+            .then(conn => {
+                let word = request.params.word;
+                conn.query("select count(*) from Word where Label='" + word + "'")
+                    .then((rows) => {
+                        response.send(rows[0]);
+                        conn.end();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        conn.end();
+                    })
+
+            }).catch(error => {
+                console.error(error);
+            });
+    }
+
 }

@@ -18,4 +18,9 @@ export function dictionaryRoute(app: Express): void {
 		.get((request, response) => {
 			controller.getSimilarWords(request, response);
 		})
+
+	app.route('/api/check/:word')
+		.get((request, response) => {
+			controller.checkWord(request, response);
+		})
 }
