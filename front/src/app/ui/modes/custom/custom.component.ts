@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IWord } from 'src/app/models';
 import { WordsService } from 'src/app/infra';
@@ -33,6 +33,9 @@ export class CustomComponent implements OnInit {
 		this.wordGridViewModel = new WordGridViewModel(this.word, this.nbRows);
 	}
 
+	public ngOnInit(): void {
+	}
+
 	public sendLetter(event: any): void {
 		if (event === 'enter') {
 			let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
@@ -43,12 +46,20 @@ export class CustomComponent implements OnInit {
 					}
 				}
 			);
+		} else if (event === 'backspace') {
+			this.wordGridViewModel.sendKey('back');
 		}
 		else {
 			this.wordGridViewModel.sendKey(event);
 		}
 	}
 
-	public ngOnInit(): void {
+	@HostListener('document:keydown', ['$event'])
+	handleKeyboardEvent(event: KeyboardEvent) {
+		const key = event.key;
+		if (!/^([a-zA-Z])$/.test(key) && key !== 'Enter' && key !== 'Backspace') {
+			return;
+		}
+		this.sendLetter(key.toLowerCase());
 	}
 }

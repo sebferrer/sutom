@@ -1,7 +1,4 @@
 <div id="word-grid-container">
-    WORD GRID
-    {{ nbLetters }} {{ firstLetter }}
-
     <table>
         <tr *ngFor="let row of wordGridViewModel.grid">
             <td *ngFor="let cell of row" class="grid-cell">

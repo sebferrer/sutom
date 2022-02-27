@@ -40,36 +40,39 @@ export class WordGridViewModel {
             return;
         }
         this.currentRow++;
-        this.currentColumn = 0;
-        for (let i = 0; i < this.nbLetters; i++) {
+        this.currentColumn = 1;
+        this.grid[this.currentRow][0] = this.firstLetter;
+        for (let i = 1; i < this.nbLetters; i++) {
             this.grid[this.currentRow][i] = '.';
         }
     }
 
     public nextColumn(): void {
-        if (this.currentColumn === this.nbLetters - 1) {
+        if (this.currentColumn === this.nbLetters) {
             return;
         }
         this.currentColumn++;
     }
 
     public previousColumn(): void {
-        if (this.currentColumn === 0) {
+        if (this.currentColumn === 1) {
             return;
         }
+        this.grid[this.currentRow][this.currentColumn - 1] = '.';
         this.currentColumn--;
     }
 
     public sendKey(key: string): void {
         if (key === 'back') {
-            this.grid[this.currentRow][this.currentColumn] = '.';
             this.previousColumn();
         } else if (key === 'enter') {
             this.nextRow();
         } else {
-            this.grid[this.currentRow][this.currentColumn] = key;
-            console.log(this.grid);
-            this.nextColumn();
+            if (this.currentColumn < this.nbLetters) {
+                this.grid[this.currentRow][this.currentColumn] = key;
+                console.log(this.grid);
+                this.nextColumn();
+            }
         }
     }
 
