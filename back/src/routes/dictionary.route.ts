@@ -23,4 +23,9 @@ export function dictionaryRoute(app: Express): void {
 		.get((request, response) => {
 			controller.checkWord(request, response);
 		})
+
+	app.route('/api/word/random')
+		.get((_, response) => {
+			controller.generateWord(response);
+		})
 }

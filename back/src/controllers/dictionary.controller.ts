@@ -69,7 +69,25 @@ export class DictionaryController {
         database.pool.getConnection()
             .then(conn => {
                 let word = request.params.word;
-                conn.query("select count(*) from Word where Label='" + word + "'")
+                conn.query("SELECT COUNT(*) FROM Word WHERE Label='" + word + "'")
+                    .then((rows) => {
+                        response.send(rows[0]);
+                        conn.end();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        conn.end();
+                    })
+
+            }).catch(error => {
+                console.error(error);
+            });
+    }
+
+    public generateWord(response: Response) {
+        database.pool.getConnection()
+            .then(conn => {
+                conn.query("SELECT Label FROM dictionary.Word JOIN (SELECT CEIL(RAND() * (SELECT MAX(Id) FROM dictionary.Word)) AS Id) AS w2 USING (Id)")
                     .then((rows) => {
                         response.send(rows[0]);
                         conn.end();
