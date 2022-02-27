@@ -3,7 +3,7 @@
     {{ nbLetters }} {{ firstLetter }}
 
     <table>
-        <tr *ngFor="let row of grid">
+        <tr *ngFor="let row of wordGridViewModel.grid">
             <td *ngFor="let cell of row" class="grid-cell">
                 <div class="cell-container">
                     <p>{{ cell }}</p>

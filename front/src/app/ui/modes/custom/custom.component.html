@@ -1,6 +1,6 @@
 <div id="container">
     CUSTOM
 
-    <app-word-grid [word]="'banane'"></app-word-grid>
+    <app-word-grid [wordGridViewModel]="wordGridViewModel"></app-word-grid>
     <app-keyboard (keyPressed)="sendLetter($event)"></app-keyboard>
 </div>
