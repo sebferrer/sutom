@@ -34,7 +34,19 @@ export class CustomComponent implements OnInit {
 	}
 
 	public sendLetter(event: any): void {
-		this.wordGridViewModel.sendKey(event);
+		if (event === 'enter') {
+			let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
+			checkWord.subscribe(
+				exists => {
+					if (exists) {
+						this.wordGridViewModel.sendKey(event);
+					}
+				}
+			);
+		}
+		else {
+			this.wordGridViewModel.sendKey(event);
+		}
 	}
 
 	public ngOnInit(): void {

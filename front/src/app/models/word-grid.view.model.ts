@@ -61,7 +61,6 @@ export class WordGridViewModel {
     }
 
     public sendKey(key: string): void {
-        console.log('>> ' + key);
         if (key === 'back') {
             this.grid[this.currentRow][this.currentColumn] = '.';
             this.previousColumn();

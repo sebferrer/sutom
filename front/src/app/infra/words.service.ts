@@ -11,10 +11,20 @@ const MY_API = '/api';
 export class WordsService {
 
 	constructor(private http: HttpClient) { }
-	
+
 	public getNbWords(word: string): Observable<any> {
 		return this.http.get<any>(
 			`${environment.backendUrl}${MY_API}${'/nbwords/'}${word}`
+		);
+	}
+
+	public checkWord(word: string): Observable<any> {
+		return this.http.get<any>(
+			`${environment.backendUrl}${MY_API}${'/check/'}${word}`
+		).pipe(
+			map(
+				check => check.exists
+			)
 		);
 	}
 }
