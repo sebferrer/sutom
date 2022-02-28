@@ -1,5 +1,8 @@
+import { WordGridComponent } from "../ui/word-grid";
 import { AudioFile } from "../util/audio-util";
 import { ILetter } from "./letter.model";
+
+const SOUND_TIME_INTERVAL = 500;
 
 export class WordGridViewModel {
 
@@ -10,6 +13,11 @@ export class WordGridViewModel {
     public currentColumn: number;
     public word: string;
     public nbRows: number;
+    public locked: boolean;
+
+    public history: Array<Array<number>>;
+
+    public parentComponent: WordGridComponent;
 
     private timeCounter: number;
     private blue = new AudioFile("assets/sounds/blue.mp3");
@@ -21,6 +29,9 @@ export class WordGridViewModel {
         this.word = word;
         this.nbRows = nbRows;
         this.timeCounter = 0;
+        this.locked = false;
+
+        this.history = [];
 
         this.nbLetters = this.word.length;
         this.firstLetter = this.word[0];
@@ -45,7 +56,7 @@ export class WordGridViewModel {
     }
 
     public nextRow(): void {
-        if (this.currentRow === this.nbRows - 1) {
+        if (this.currentRow === this.nbRows) {
             return;
         }
 
@@ -78,13 +89,45 @@ export class WordGridViewModel {
             if (this.timeCounter < this.nbLetters) {
                 this.setColors();
             } else {
-                this.grid[this.currentRow][0].letter = this.firstLetter;
-                for (let i = 1; i < this.nbLetters; i++) {
-                    this.grid[this.currentRow][i].letter = '.';
-                }
-                this.timeCounter = 0;
+                this.endRow();
             }
-        }, 500);
+        }, SOUND_TIME_INTERVAL);
+    }
+
+    public addHistoryRow(): void {
+        this.history.push(
+            this.grid[this.currentRow - 1].map(
+                e => {
+                    switch (e.color) {
+                        case 'red':
+                            return 2;
+                        case 'yellow':
+                            return 1;
+                        default:
+                            return 0;
+
+                    }
+                }
+            )
+        );
+    }
+
+    public endRow(): void {
+        this.addHistoryRow();
+        if (this.previousWord() === this.word) {
+            this.locked = true;
+            this.parentComponent.statusChange.emit('win');
+            return;
+        } else if (this.currentRow === this.nbRows) {
+            this.locked = true;
+            this.parentComponent.statusChange.emit('lose');
+            return;
+        }
+        this.grid[this.currentRow][0].letter = this.firstLetter;
+        for (let i = 1; i < this.nbLetters; i++) {
+            this.grid[this.currentRow][i].letter = '.';
+        }
+        this.timeCounter = 0;
     }
 
     public setPlaces(): void {
@@ -130,6 +173,9 @@ export class WordGridViewModel {
     }
 
     public sendKey(key: string): void {
+        if (this.locked) {
+            return;
+        }
         if (key === 'back') {
             this.previousColumn();
         } else if (key === 'enter') {

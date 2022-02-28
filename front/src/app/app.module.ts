@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CustomComponent } from './ui/modes/custom';
 import { WordGridComponent } from './ui/word-grid';
 import { KeyboardComponent } from './ui/keyboard';
+import { DialogInfoComponent } from './ui/dialog/dialog-info';
+import { DialogWinComponent } from './ui/dialog/dialog-win';
 
 @NgModule({
 	declarations: [
@@ -30,7 +32,9 @@ import { KeyboardComponent } from './ui/keyboard';
 		HomeComponent,
 		CustomComponent,
 		WordGridComponent,
-		KeyboardComponent
+		KeyboardComponent,
+		DialogInfoComponent,
+		DialogWinComponent
 	],
 	imports: [
 		BrowserModule,
@@ -52,6 +56,10 @@ import { KeyboardComponent } from './ui/keyboard';
 	],
 	providers: [
 		WordsService
+	],
+	entryComponents: [
+		DialogInfoComponent,
+		DialogWinComponent
 	],
 	bootstrap: [AppComponent]
 })

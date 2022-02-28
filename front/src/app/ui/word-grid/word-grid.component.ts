@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { WordGridViewModel } from 'src/app/models/word-grid.view.model';
 
 @Component({
@@ -11,11 +11,15 @@ export class WordGridComponent implements OnInit {
 	@Input()
 	public wordGridViewModel: WordGridViewModel;
 
+	@Output()
+	public statusChange = new EventEmitter();
+
 	constructor(
 	) {
 	}
 
 	public ngOnInit(): void {
+		this.wordGridViewModel.parentComponent = this;
 	}
 
 	public sendKey(key: string): void {

@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Vous avez gagné !</h1>
+<div mat-dialog-content class="dialog-content">
+    <p>Vous avez trouvé le mot secret.</p>
+    <p>N'hésitez pas à partager votre résultat à vos amis !</p>
+
+    <button id="copyButton" mat-icon-button type="button" [disabled]="showCopySuccessMessage"
+        (click)="copyToClipboard()" style="display: block;">
+        <mat-icon>file_copy</mat-icon> Copier
+    </button>
+    <div *ngFor="let row of data.history" style="display: block;">
+        <div *ngFor="let cell of row" style="display: inline-block; margin: 0.1rem;">
+            <div *ngIf="cell === 0" style="display: inline;">
+                🟦
+            </div>
+            <div *ngIf="cell === 1" style="display: inline;">
+                🟡
+            </div>
+            <div *ngIf="cell === 2" style="display: inline;">
+                🟥
+            </div>
+        </div>
+    </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close="" (click)="onCloseClick()" color="primary">Fermer</button>
+</div>

@@ -1,4 +1,4 @@
 <div id="container">
-    <app-word-grid [wordGridViewModel]="wordGridViewModel"></app-word-grid>
+    <app-word-grid [wordGridViewModel]="wordGridViewModel" (statusChange)="statusChange($event)"></app-word-grid>
     <app-keyboard (keyPressed)="sendLetter($event)"></app-keyboard>
 </div>

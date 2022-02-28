@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IWord } from 'src/app/models';
 import { WordsService } from 'src/app/infra';
 import { ActivatedRoute } from '@angular/router';
-import { decrypt, encrypt } from 'src/app/util/aes-util';
+import { decrypt } from 'src/app/util/aes-util';
 import { WordGridViewModel } from 'src/app/models/word-grid.view.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogInfoComponent } from '../../dialog/dialog-info';
+import { DialogWinComponent } from '../../dialog/dialog-win';
 
 const DEFAULT_NB_ROWS = 6;
 
@@ -21,7 +22,8 @@ export class CustomComponent implements OnInit {
 
 	constructor(
 		private wordsService: WordsService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private dialog: MatDialog,
 	) {
 		// 953cfbb6c946
 		// 873ce1b8d24ddc
@@ -57,6 +59,45 @@ export class CustomComponent implements OnInit {
 		else {
 			this.wordGridViewModel.sendKey(event);
 		}
+	}
+
+	public statusChange(event: any): void {
+		if (event === 'lose') {
+			this.openLoseDialog();
+		} else if (event === 'win') {
+			this.openWinDialog();
+		}
+	}
+
+	public openWinDialog() {
+		this.dialog.open(DialogWinComponent, {
+			autoFocus: false,
+			width: '20rem',
+			panelClass: 'custom-modalbox',
+			data: {
+				history: this.wordGridViewModel.history
+			}
+		}).afterClosed().subscribe(response => {
+			if (response == null || response.answer !== 'close') {
+				return;
+			}
+		});
+	}
+
+	public openLoseDialog() {
+		this.dialog.open(DialogInfoComponent, {
+			autoFocus: false,
+			width: '20rem',
+			panelClass: 'custom-modalbox',
+			data: {
+				title: 'Vous avez perdu !',
+				content: ['Le mot secret était ' + this.word.toUpperCase()]
+			}
+		}).afterClosed().subscribe(response => {
+			if (response == null || response.answer !== 'close') {
+				return;
+			}
+		});
 	}
 
 	@HostListener('document:keydown', ['$event'])
