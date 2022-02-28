@@ -1,3 +1,4 @@
+import { AudioFile } from "../util/audio-util";
 import { ILetter } from "./letter.model";
 
 export class WordGridViewModel {
@@ -10,9 +11,16 @@ export class WordGridViewModel {
     public word: string;
     public nbRows: number;
 
+    private timeCounter: number;
+    private blue = new AudioFile("assets/sounds/blue.mp3");
+    private yellow = new AudioFile("assets/sounds/yellow.mp3");
+    private red = new AudioFile("assets/sounds/red.mp3");
+    private spontz = new AudioFile("assets/sounds/spontz.mp3");
+
     constructor(word: string, nbRows: number) {
         this.word = word;
         this.nbRows = nbRows;
+        this.timeCounter = 0;
 
         this.nbLetters = this.word.length;
         this.firstLetter = this.word[0];
@@ -43,19 +51,40 @@ export class WordGridViewModel {
 
         this.currentRow++;
         this.currentColumn = 1;
-        this.grid[this.currentRow][0].letter = this.firstLetter;
-        for (let i = 1; i < this.nbLetters; i++) {
-            this.grid[this.currentRow][i].letter = '.';
-        }
 
         this.setPlaces();
         this.setColors();
     }
 
-    public setColors(): void {
-        for (let i = 0; i < this.nbLetters; i++) {
-            this.grid[this.currentRow - 1][i].color = this.grid[this.currentRow - 1][i].place;
+    public playSound(color: string): void {
+        switch (color) {
+            case 'yellow':
+                this.yellow.play();
+                break;
+            case 'red':
+                this.red.play();
+                break;
+            default:
+                this.blue.play();
+                break;
         }
+    }
+
+    public setColors(): void {
+        setTimeout(() => {
+            this.grid[this.currentRow - 1][this.timeCounter].color = this.grid[this.currentRow - 1][this.timeCounter].place;
+            this.playSound(this.grid[this.currentRow - 1][this.timeCounter].color);
+            this.timeCounter++;
+            if (this.timeCounter < this.nbLetters) {
+                this.setColors();
+            } else {
+                this.grid[this.currentRow][0].letter = this.firstLetter;
+                for (let i = 1; i < this.nbLetters; i++) {
+                    this.grid[this.currentRow][i].letter = '.';
+                }
+                this.timeCounter = 0;
+            }
+        }, 500);
     }
 
     public setPlaces(): void {
@@ -72,7 +101,7 @@ export class WordGridViewModel {
             }
         }
         for (let i = 0; i < this.nbLetters; i++) {
-            if(foundLetters.includes(i)) {
+            if (foundLetters.includes(i)) {
                 continue;
             }
             if (wordArray.includes(this.previousWord()[i])) {
