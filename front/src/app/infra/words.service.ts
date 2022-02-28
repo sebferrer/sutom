@@ -18,7 +18,7 @@ export class WordsService {
 		);
 	}
 
-	public checkWord(word: string): Observable<any> {
+	public checkWord(word: string): Observable<boolean> {
 		return this.http.get<any>(
 			`${environment.backendUrl}${MY_API}${'/check/'}${word}`
 		).pipe(

@@ -24,6 +24,7 @@ export class CustomComponent implements OnInit {
 		private route: ActivatedRoute
 	) {
 		// 953cfbb6c946
+		// 873ce1b8d24ddc
 		const cypheredWord = this.route.snapshot.paramMap.get('aesword');
 
 		console.log(decrypt(cypheredWord));
@@ -38,14 +39,18 @@ export class CustomComponent implements OnInit {
 
 	public sendLetter(event: any): void {
 		if (event === 'enter') {
-			let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
-			checkWord.subscribe(
-				exists => {
-					if (exists) {
-						this.wordGridViewModel.sendKey(event);
+			if (this.wordGridViewModel.currentWord() === this.word) {
+				this.wordGridViewModel.sendKey(event);
+			} else {
+				let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
+				checkWord.subscribe(
+					exists => {
+						if (exists) {
+							this.wordGridViewModel.sendKey(event);
+						}
 					}
-				}
-			);
+				);
+			}
 		} else if (event === 'backspace') {
 			this.wordGridViewModel.sendKey('back');
 		}

@@ -16,8 +16,6 @@ export class WordGridComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		console.log('load wordgrid');
-		console.log(this.wordGridViewModel);
 	}
 
 	public sendKey(key: string): void {

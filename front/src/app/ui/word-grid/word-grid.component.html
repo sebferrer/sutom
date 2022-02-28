@@ -1,9 +1,9 @@
 <div id="word-grid-container">
     <table>
         <tr *ngFor="let row of wordGridViewModel.grid">
-            <td *ngFor="let cell of row" class="grid-cell">
+            <td *ngFor="let cell of row" class="grid-cell" [ngClass]="cell.color">
                 <div class="cell-container">
-                    <p>{{ cell }}</p>
+                    <p>{{ cell.letter }}</p>
                 </div>
             </td>
         </tr>
