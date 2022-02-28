@@ -25,6 +25,7 @@ import { WordGridComponent } from './ui/word-grid';
 import { KeyboardComponent } from './ui/keyboard';
 import { DialogInfoComponent } from './ui/dialog/dialog-info';
 import { DialogWinComponent } from './ui/dialog/dialog-win';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -52,7 +53,8 @@ import { DialogWinComponent } from './ui/dialog/dialog-win';
 		MatInputModule,
 		MatCardModule,
 		MatTooltipModule,
-		MatDialogModule
+		MatDialogModule,
+		FormsModule
 	],
 	providers: [
 		WordsService

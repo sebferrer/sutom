@@ -1,3 +1,10 @@
 <div id="container">
-    HOME
+    <p>Choisissez un mot :</p>
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Votre mot</mat-label>
+        <input matInput type="text" [(ngModel)]="word">
+      </mat-form-field>
+      <br/>
+      <button mat-flat-button color="primary" (click)="generate()">Générer votre Sutom</button>
+      <div class="output" [innerHTML]="output"></div>
 </div>

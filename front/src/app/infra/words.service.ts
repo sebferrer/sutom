@@ -15,6 +15,10 @@ export class WordsService {
 	public getNbWords(word: string): Observable<any> {
 		return this.http.get<any>(
 			`${environment.backendUrl}${MY_API}${'/nbwords/'}${word}`
+		).pipe(
+			map(
+				res => res.nbWords
+			)
 		);
 	}
 
