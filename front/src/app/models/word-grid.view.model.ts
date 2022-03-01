@@ -16,10 +16,10 @@ export class WordGridViewModel {
     public locked: boolean;
 
     public history: Array<Array<number>>;
-
     public parentComponent: WordGridComponent;
-
+    public colorMap: Map<string, Array<string>>;
     private timeCounter: number;
+
     private blue = new AudioFile("assets/sounds/blue.mp3");
     private yellow = new AudioFile("assets/sounds/yellow.mp3");
     private red = new AudioFile("assets/sounds/red.mp3");
@@ -31,6 +31,8 @@ export class WordGridViewModel {
         this.timeCounter = 0;
         this.locked = false;
 
+        this.colorMap = new Map([['blue', 'azertyuiopqsdfghjklmwxcvbn'.split('')], ['red', new Array<string>()],
+        ['yellow', new Array<string>()], ['grey', new Array<string>()]])
         this.history = [];
 
         this.nbLetters = this.word.length;
@@ -114,6 +116,7 @@ export class WordGridViewModel {
 
     public endRow(): void {
         this.addHistoryRow();
+        this.parentComponent.endRow.emit(this.colorMap);
         if (this.previousWord() === this.word) {
             this.locked = true;
             this.parentComponent.statusChange.emit('win');
@@ -140,6 +143,13 @@ export class WordGridViewModel {
                     wordArray.splice(index, 1);
                     this.grid[this.currentRow - 1][i].place = 'red';
                     foundLetters.push(i);
+
+                    if (!this.colorMap.get('red').includes(this.grid[this.currentRow - 1][i].letter)) {
+                        this.colorMap.get('red').push(this.grid[this.currentRow - 1][i].letter);
+                        this.colorMap.set('yellow', this.colorMap.get('yellow').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
+                        this.colorMap.set('blue', this.colorMap.get('blue').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
+                        this.colorMap.set('grey', this.colorMap.get('grey').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
+                    }
                 }
             }
         }
@@ -152,6 +162,18 @@ export class WordGridViewModel {
                 if (index > -1) {
                     wordArray.splice(index, 1);
                     this.grid[this.currentRow - 1][i].place = 'yellow';
+
+                    if (!this.colorMap.get('yellow').includes(this.grid[this.currentRow - 1][i].letter)) {
+                        this.colorMap.get('yellow').push(this.grid[this.currentRow - 1][i].letter);
+                        this.colorMap.set('blue', this.colorMap.get('blue').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
+                        this.colorMap.set('grey', this.colorMap.get('grey').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
+                    }
+                }
+            } else {
+
+                if (!this.colorMap.get('grey').includes(this.grid[this.currentRow - 1][i].letter)) {
+                    this.colorMap.get('grey').push(this.grid[this.currentRow - 1][i].letter);
+                    this.colorMap.set('blue', this.colorMap.get('blue').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
                 }
             }
         }
@@ -165,7 +187,7 @@ export class WordGridViewModel {
     }
 
     public previousColumn(): void {
-        if (this.currentColumn === 1) {
+        if (this.currentColumn === 0 || this.currentRow === 0 && this.currentColumn === 1) {
             return;
         }
         this.grid[this.currentRow][this.currentColumn - 1].letter = '.';

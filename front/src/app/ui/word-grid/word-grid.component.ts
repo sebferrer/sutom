@@ -14,6 +14,9 @@ export class WordGridComponent implements OnInit {
 	@Output()
 	public statusChange = new EventEmitter();
 
+	@Output()
+	public endRow = new EventEmitter();
+
 	constructor(
 	) {
 	}

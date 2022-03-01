@@ -31,4 +31,14 @@ export class WordsService {
 			)
 		);
 	}
+
+	public getRandomWord(): Observable<any> {
+		return this.http.get<any>(
+			`${environment.backendUrl}${MY_API}${'/word/random/'}`
+		).pipe(
+			map(
+				res => res.Label
+			)
+		);
+	}
 }

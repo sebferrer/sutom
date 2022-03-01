@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WordsService } from 'src/app/infra';
 import { encrypt } from 'src/app/util/aes-util';
-import * as replaceSpecialCharacters  from 'replace-special-characters';
+import * as replaceSpecialCharacters from 'replace-special-characters';
 
 @Component({
 	selector: 'app-home',
@@ -12,10 +12,14 @@ export class HomeComponent implements OnInit {
 
 	public word: string;
 	public output: string;
+	public outputRandom: string;
+	public showDailyWord: boolean;
 
 	constructor(
 		private wordsService: WordsService
-	) { }
+	) {
+		this.showDailyWord = false;
+	}
 
 	public ngOnInit(): void {
 	}
@@ -35,5 +39,19 @@ export class HomeComponent implements OnInit {
 				}
 			}
 		)
+	}
+
+	public generateRandom(): void {
+		this.wordsService.getRandomWord().subscribe(
+			word => {
+				word = replaceSpecialCharacters(word).replace(/[^a-zA-Z ]/g, "").toLowerCase();
+				const url = "https://sutom.io/#/custom/" + encrypt(word) + "/";
+				this.outputRandom = "Voici votre sutom: <a href=\"" + url + "\">" + url + "</a>";
+			}
+		);
+	}
+
+	public dailyWord(): void {
+		this.showDailyWord = true;
 	}
 }

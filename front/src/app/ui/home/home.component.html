@@ -1,10 +1,30 @@
 <div id="container">
-    <p>Choisissez un mot :</p>
-    <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Votre mot</mat-label>
-        <input matInput type="text" [(ngModel)]="word">
-      </mat-form-field>
-      <br/>
-      <button mat-flat-button color="primary" (click)="generate()">Générer votre Sutom</button>
-      <div class="output" [innerHTML]="output"></div>
+    <div class="custom">
+        <h2>Choisissez un mot :</h2>
+        <mat-form-field class="input-custom" appearance="outline">
+            <mat-label>Votre mot</mat-label>
+            <input matInput class="word-input" type="text" [(ngModel)]="word">
+        </mat-form-field>
+        <br />
+        <button mat-flat-button color="primary" (click)="generate()">Générer votre Sutom</button>
+        <div class="output" [innerHTML]="output"></div>
+    </div>
+    <div class="delimiter"></div>
+    <div class="random">
+        <h2>Faire un Sutom aléatoire</h2>
+        <button mat-flat-button color="primary" (click)="generateRandom()">Générer un Sutom aléatoire</button>
+        <div class="output" [innerHTML]="outputRandom"></div>
+    </div>
+    <div class="delimiter"></div>
+    <div class="random">
+        <h2>Mot du jour</h2>
+        <button mat-flat-button color="primary" (click)="dailyWord()">Faire le mot du jour</button>
+        <div class="daily-word" [ngClass]="showDailyWord ? 'show' : 'hide'">
+            <p>Ici vous ne trouverez qu'une version du Sutom permettant de générer ses propres grilles ou des grilles
+                aléatoires.</p>
+            <p>Si vous voulez jouer avec un mot par jour en suivant vos statistiques, je vous recommande l'excellent <a
+                    href="https://sutom.nocle.fr/">https://sutom.nocle.fr/</a> qui m'a donné envie de créer cette
+                version du jeu. Un grand merci à eux.</p>
+        </div>
+    </div>
 </div>

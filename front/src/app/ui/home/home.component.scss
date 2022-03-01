@@ -3,8 +3,59 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    color: white;
 }
 
 .output {
     margin-top: 2rem;
+}
+
+.word-input {
+    color: black;
+}
+
+.custom {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.delimiter {
+    height: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid white;
+}
+
+.input-custom {
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    height: 3.7rem;
+    margin-bottom: 1rem;
+}
+
+.daily-word {
+    margin-top: 1rem;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+/* input color class */
+::ng-deep input.mat-input-element {
+    color: white !important;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: white !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+    background-color: white !important;
 }
