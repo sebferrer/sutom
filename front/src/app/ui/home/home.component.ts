@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { WordsService } from 'src/app/infra';
 import { encrypt } from 'src/app/util/aes-util';
 import * as replaceSpecialCharacters  from 'replace-special-characters';
@@ -22,9 +21,10 @@ export class HomeComponent implements OnInit {
 	}
 
 	public generate(): void {
+		if (this.word == null || this.word === '') {
+			return;
+		}
 		this.word = replaceSpecialCharacters(this.word).replace(/[^a-zA-Z ]/g, "").toLowerCase();
-		console.log("aaaa");
-		console.log(this.word);
 		this.wordsService.getNbWords(this.word).subscribe(
 			nb => {
 				if (nb < 5) {

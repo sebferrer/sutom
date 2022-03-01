@@ -1,6 +1,6 @@
 #keyboard-container {
-    margin-top: 6rem;
-    width: 90%;
+    margin-top: 2rem;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -12,25 +12,27 @@
         cursor: pointer;
         text-transform: uppercase;
         display: inline-block;
-        font-size: 2rem;
-        border: 1px solid black;
+        font-size: 1.2rem;
+        color: white;
+        border: 1px solid white;
         border-radius: 0.5rem;
-        margin: 0.5rem;
-        padding: 0.5rem;
-        width: 2rem;
-        height: 2rem;
+        margin: 0.15rem;
+        padding: 0.4rem;
+        width: 4vw;
+        height: 1.7rem;
     }
 
     .custom-key {
         cursor: pointer;
         text-transform: capitalize;
         display: inline-block;
-        font-size: 2rem;
-        border: 1px solid black;
+        font-size: 1.2rem;
+        color: white;
+        border: 1px solid white;
         border-radius: 0.5rem;
-        margin: 0.5rem;
-        padding: 0.5rem;
-        height: 2rem;
+        margin: 0.15rem;
+        padding: 0.4rem;
+        height: 1.7rem;
     }
 
     .noselect {
@@ -40,6 +42,56 @@
         -moz-user-select: none; /* Old versions of Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #keyboard-container {
+        margin-top: 6rem;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .row {
+        display: block;
+
+        .squared-key {
+            cursor: pointer;
+            text-transform: uppercase;
+            display: inline-block;
+            font-size: 2rem;
+            color: white;
+            border: 1px solid white;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .custom-key {
+            cursor: pointer;
+            text-transform: capitalize;
+            display: inline-block;
+            font-size: 2rem;
+            color: white;
+            border: 1px solid white;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            height: 2rem;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
                                         supported by Chrome, Edge, Opera and Firefox */
+        }
     }
 }

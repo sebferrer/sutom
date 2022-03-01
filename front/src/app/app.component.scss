@@ -5,7 +5,10 @@ mat-toolbar {
     top: 0;
     width: 100%;
     height: 4rem;
-    background-color: #124191;
+    /*background-color: #124191;*/
+    /*background-color: #081998;*/
+    background-color: #2B2B2B;
+    border-bottom: 1px solid white;
     z-index: 100;
 }
 
@@ -15,7 +18,7 @@ mat-toolbar {
 }
 
 #head-title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
