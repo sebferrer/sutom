@@ -41,7 +41,7 @@ export class DialogWinComponent {
 			}
 			output += '\n';
 		}
-		output += '\n http://sutom.io/';
+		output += '\nhttp://sutom.io/';
 		navigator.clipboard.writeText(output);
 	}
 

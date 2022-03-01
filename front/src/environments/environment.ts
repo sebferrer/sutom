@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	backendUrl: 'http://sutom.io:3000'
+	backendUrl: 'https://sutom.io'
 };
 
 /*
