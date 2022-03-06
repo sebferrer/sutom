@@ -1,7 +1,11 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { encrypt } from 'src/app/util/aes-util';
+
+const EMOJI_MAP = new Map<number, string>([[0, '🟦'], [1, '🟡'], [2, '🟥']]);
 
 export interface IDialogData {
+	word: string;
 	history: Array<Array<number>>;
 }
 
@@ -13,6 +17,7 @@ export class DialogWinComponent {
 	@ViewChild('result')
 	public result: ElementRef<HTMLTextAreaElement>;
 	public showCopySuccessMessage = false;
+	public emojiMap = EMOJI_MAP;
 
 	constructor(
 		public dialogRef: MatDialogRef<DialogWinComponent>,
@@ -24,24 +29,14 @@ export class DialogWinComponent {
 	}
 
 	public copyToClipboard(): void {
-		let output = 'SUTOM ' + this.data.history.length + '/6\n\n';
+		let output = 'Wordus ' + this.data.history.length + '/6\n\n';
 		for (let i = 0; i < this.data.history.length; i++) {
-			for (let j = 0; j <this.data. history[i].length; j++) {
-				switch (this.data.history[i][j]) {
-					case 0:
-						output += "🟦";
-						break;
-					case 1:
-						output += "🟡";
-						break;
-					case 2:
-						output += "🟥";
-						break;
-				}
+			for (let j = 0; j < this.data.history[i].length; j++) {
+				output += EMOJI_MAP.get(this.data.history[i][j])
 			}
 			output += '\n';
 		}
-		output += '\nhttp://sutom.io/';
+		output += '\nhttp://wordus.fr/#/custom/' + encrypt(this.data.word);
 		navigator.clipboard.writeText(output);
 	}
 

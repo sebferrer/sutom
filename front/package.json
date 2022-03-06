@@ -1,8 +1,8 @@
 {
-  "name": "sutom",
+  "name": "wordus",
   "version": "0.0.1",
   "author": "Seb Ferrer",
-  "homepage": "https://sutom.io/",
+  "homepage": "https://wordus.fr/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -54,5 +54,5 @@
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
   },
-  "description": "Sutom"
+  "description": "Wordus"
 }

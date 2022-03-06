@@ -88,6 +88,7 @@ export class CustomComponent implements OnInit {
 			width: '20rem',
 			panelClass: 'custom-modalbox',
 			data: {
+				word: this.word,
 				history: this.wordGridViewModel.history
 			}
 		}).afterClosed().subscribe(response => {

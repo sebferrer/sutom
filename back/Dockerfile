@@ -1,18 +1,18 @@
 FROM centos:centos7
 LABEL   MAINTAINER="Seb Ferrer" \
-        IMAGE_NAME="sutom"
+        IMAGE_NAME="wordus"
 
 ARG RPMS='nodejs'
 
 WORKDIR /opt
 
-RUN mkdir sutom &&\
+RUN mkdir wordus &&\
     curl -sL https://rpm.nodesource.com/setup_10.x | bash - &&\
     rpm --rebuilddb &&\
     yum install -y --nogpgcheck ${RPMS} &&\
     yum -y clean all
 
-WORKDIR /opt/sutom
+WORKDIR /opt/wordus
 
 COPY package.json .
 COPY package-lock.json .

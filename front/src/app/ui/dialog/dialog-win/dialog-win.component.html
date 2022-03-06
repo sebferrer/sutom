@@ -9,14 +9,8 @@
     </button>
     <div *ngFor="let row of data.history" style="display: block;">
         <div *ngFor="let cell of row" style="display: inline-block; margin: 0.1rem;">
-            <div *ngIf="cell === 0" style="display: inline;">
-                🟦
-            </div>
-            <div *ngIf="cell === 1" style="display: inline;">
-                🟡
-            </div>
-            <div *ngIf="cell === 2" style="display: inline;">
-                🟥
+            <div style="display: inline;">
+                {{ emojiMap.get(cell) }}
             </div>
         </div>
     </div>

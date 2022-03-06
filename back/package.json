@@ -1,7 +1,7 @@
 {
-  "name": "sutom",
+  "name": "wordus",
   "version": "0.0.1",
-  "description": "Sutom",
+  "description": "wordus",
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev src/server.ts",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebferrer/sutom.git"
+    "url": "git+https://github.com/sebferrer/wordus.git"
   },
   "author": "",
   "license": "BSD 3-Clause",
   "bugs": {
-    "url": "https://github.com/sebferrer/sutom/issues"
+    "url": "https://github.com/sebferrer/wordus/issues"
   },
-  "homepage": "https://github.com/sebferrer/sutom#readme",
+  "homepage": "https://github.com/sebferrer/wordus#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",

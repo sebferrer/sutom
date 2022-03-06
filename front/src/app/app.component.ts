@@ -6,7 +6,7 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  title = 'sutom';
+  title = 'wordus';
 
   constructor(private elementRef: ElementRef) {}
 
