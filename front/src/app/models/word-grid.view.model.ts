@@ -1,6 +1,7 @@
 import { WordGridComponent } from "../ui/word-grid";
 import { AudioFile } from "../util/audio-util";
 import { ILetter } from "./letter.model";
+import { IProgression, IProgressionLetter } from "./progression";
 
 const SOUND_TIME_INTERVAL = 500;
 
@@ -18,6 +19,7 @@ export class WordGridViewModel {
     public history: Array<Array<number>>;
     public parentComponent: WordGridComponent;
     public colorMap: Map<string, Array<string>>;
+    public progression: IProgression;
     private timeCounter: number;
 
     private blue = new AudioFile("assets/sounds/blue.mp3");
@@ -30,6 +32,11 @@ export class WordGridViewModel {
         this.nbRows = nbRows;
         this.timeCounter = 0;
         this.locked = false;
+
+        this.progression = { letters: new Array<IProgressionLetter>() };
+        for (let i = 0; i < this.word.length; i++) {
+            this.progression.letters.push({ letter: this.word[i], found: false });
+        }
 
         this.colorMap = new Map([['blue', 'azertyuiopqsdfghjklmwxcvbn'.split('')], ['red', new Array<string>()],
         ['yellow', new Array<string>()], ['grey', new Array<string>()]])
@@ -84,6 +91,7 @@ export class WordGridViewModel {
     }
 
     public setColors(): void {
+        this.locked = true;
         setTimeout(() => {
             this.grid[this.currentRow - 1][this.timeCounter].color = this.grid[this.currentRow - 1][this.timeCounter].place;
             this.playSound(this.grid[this.currentRow - 1][this.timeCounter].color);
@@ -128,9 +136,10 @@ export class WordGridViewModel {
         }
         this.grid[this.currentRow][0].letter = this.firstLetter;
         for (let i = 1; i < this.nbLetters; i++) {
-            this.grid[this.currentRow][i].letter = '.';
+            this.grid[this.currentRow][i].letter = this.progression.letters[i].found ? this.word[i] : '.';
         }
         this.timeCounter = 0;
+        this.locked = false;
     }
 
     public setPlaces(): void {
@@ -150,6 +159,7 @@ export class WordGridViewModel {
                         this.colorMap.set('blue', this.colorMap.get('blue').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
                         this.colorMap.set('grey', this.colorMap.get('grey').filter(e => e !== this.grid[this.currentRow - 1][i].letter));
                     }
+                    this.progression.letters[i].found = true;
                 }
             }
         }
@@ -177,6 +187,7 @@ export class WordGridViewModel {
                 }
             }
         }
+        console.log(this.progression);
     }
 
     public nextColumn(): void {
