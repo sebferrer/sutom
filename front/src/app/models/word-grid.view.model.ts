@@ -134,12 +134,16 @@ export class WordGridViewModel {
             this.parentComponent.statusChange.emit('lose');
             return;
         }
+        this.initLastLine();
+        this.timeCounter = 0;
+        this.locked = false;
+    }
+
+    public initLastLine(): void {
         this.grid[this.currentRow][0].letter = this.firstLetter;
         for (let i = 1; i < this.nbLetters; i++) {
             this.grid[this.currentRow][i].letter = this.progression.letters[i].found ? this.word[i] : '.';
         }
-        this.timeCounter = 0;
-        this.locked = false;
     }
 
     public setPlaces(): void {
@@ -198,7 +202,8 @@ export class WordGridViewModel {
     }
 
     public previousColumn(): void {
-        if (this.currentColumn === 0 || this.currentRow === 0 && this.currentColumn === 1) {
+        if (this.currentColumn === 1) {
+            this.initLastLine();
             return;
         }
         this.grid[this.currentRow][this.currentColumn - 1].letter = '.';
