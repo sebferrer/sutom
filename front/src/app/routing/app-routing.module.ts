@@ -9,21 +9,11 @@ import { CustomComponent } from '../ui/modes/custom';
 const routes: Routes = [
 	{
 		path: '',
-		children: [
-			{
-				path: '',
-				component: HomeComponent,
-			},
-			{
-				path: 'custom',
-				children: [
-					{
-						path: ':aesword',
-						component: CustomComponent
-					}
-				]
-			}
-		]
+		component: HomeComponent
+	},
+	{
+		path: ':aesword',
+		component: CustomComponent
 	}
 ];
 

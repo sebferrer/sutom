@@ -36,7 +36,7 @@ export class DialogWinComponent {
 			}
 			output += '\n';
 		}
-		output += '\nhttp://wordus.fr/#/custom/' + encrypt(this.data.word);
+		output += '\nhttp://wordus.fr/#/' + encrypt(this.data.word);
 		navigator.clipboard.writeText(output);
 	}
 
