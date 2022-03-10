@@ -6,11 +6,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { AModeComponent } from '../mode';
 
 @Component({
-	selector: 'app-custom',
-	templateUrl: './custom.component.html',
-	styleUrls: ['./custom.component.scss']
+	selector: 'app-spontz',
+	templateUrl: './spontz.component.html',
+	styleUrls: ['./spontz.component.scss']
 })
-export class CustomComponent extends AModeComponent implements OnInit {
+export class SpontzComponent extends AModeComponent implements OnInit {
 
 	constructor(
 		protected wordsService: WordsService,
@@ -18,6 +18,6 @@ export class CustomComponent extends AModeComponent implements OnInit {
 		protected dialog: MatDialog
 	) {
 		super(wordsService, route, dialog);
-		this.wordGridViewModel = new WordGridViewModel(this.word, this.nbRows);
+		this.wordGridViewModel = new WordGridViewModel(this.word, this.nbRows, true);
 	}
 }

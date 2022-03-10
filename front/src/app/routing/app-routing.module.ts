@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { CustomComponent } from '../ui/modes/custom';
+import { SpontzComponent } from '../ui/modes/spontz';
 
 const routes: Routes = [
 	{
@@ -14,6 +15,10 @@ const routes: Routes = [
 	{
 		path: ':aesword',
 		component: CustomComponent
+	},
+	{
+		path: 'spontz/:aesword',
+		component: SpontzComponent
 	}
 ];
 

@@ -25,13 +25,18 @@ export class WordGridViewModel {
     private blue = new AudioFile("assets/sounds/blue.mp3");
     private yellow = new AudioFile("assets/sounds/yellow.mp3");
     private red = new AudioFile("assets/sounds/red.mp3");
+    private ba = new AudioFile("assets/sounds/ba.mp3");
+    private meow = new AudioFile("assets/sounds/meow.mp3");
     private spontz = new AudioFile("assets/sounds/spontz.mp3");
 
-    constructor(word: string, nbRows: number) {
+    private isSpontz: boolean;
+
+    constructor(word: string, nbRows: number, isSpontz?: boolean) {
         this.word = word;
         this.nbRows = nbRows;
         this.timeCounter = 0;
         this.locked = false;
+        this.isSpontz = isSpontz == null ? false : true;
 
         this.progression = { letters: new Array<IProgressionLetter>() };
         for (let i = 0; i < this.word.length; i++) {
@@ -77,16 +82,30 @@ export class WordGridViewModel {
     }
 
     public playSound(color: string): void {
-        switch (color) {
-            case 'yellow':
-                this.yellow.play();
-                break;
-            case 'red':
-                this.red.play();
-                break;
-            default:
-                this.blue.play();
-                break;
+        if (this.isSpontz) {
+            switch (color) {
+                case 'yellow':
+                    this.meow.play();
+                    break;
+                case 'red':
+                    this.spontz.play();
+                    break;
+                default:
+                    this.ba.play();
+                    break;
+            }
+        } else {
+            switch (color) {
+                case 'yellow':
+                    this.yellow.play();
+                    break;
+                case 'red':
+                    this.red.play();
+                    break;
+                default:
+                    this.blue.play();
+                    break;
+            }
         }
     }
 

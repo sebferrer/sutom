@@ -26,12 +26,14 @@ import { KeyboardComponent } from './ui/keyboard';
 import { DialogInfoComponent } from './ui/dialog/dialog-info';
 import { DialogWinComponent } from './ui/dialog/dialog-win';
 import { FormsModule } from '@angular/forms';
+import { SpontzComponent } from './ui/modes/spontz';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
 		CustomComponent,
+		SpontzComponent,
 		WordGridComponent,
 		KeyboardComponent,
 		DialogInfoComponent,
