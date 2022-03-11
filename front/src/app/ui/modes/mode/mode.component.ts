@@ -27,8 +27,6 @@ export class AModeComponent implements OnInit {
 		protected route: ActivatedRoute,
 		protected dialog: MatDialog,
 	) {
-		// 953cfbb6c946
-		// 873ce1b8d24ddc
 		const cypheredWord = this.route.snapshot.paramMap.get('aesword');
 
 		console.log(decrypt(cypheredWord));
@@ -37,14 +35,9 @@ export class AModeComponent implements OnInit {
 		this.nbRows = this.nbRows == null ? DEFAULT_NB_ROWS : this.nbRows;
 
 		this.keys = new Array<Array<IKey>>();
-		this.keys.push([{ letter: 'a', color: 'blue' }, { letter: 'z', color: 'blue' }, { letter: 'e', color: 'blue' }, { letter: 'r', color: 'blue' },
-		{ letter: 't', color: 'blue' }, { letter: 'y', color: 'blue' }, { letter: 'u', color: 'blue' }, { letter: 'i', color: 'blue' },
-		{ letter: 'o', color: 'blue' }, { letter: 'p', color: 'blue' }]);
-		this.keys.push([{ letter: 'q', color: 'blue' }, { letter: 's', color: 'blue' }, { letter: 'd', color: 'blue' }, { letter: 'f', color: 'blue' },
-		{ letter: 'g', color: 'blue' }, { letter: 'h', color: 'blue' }, { letter: 'j', color: 'blue' }, { letter: 'k', color: 'blue' },
-		{ letter: 'l', color: 'blue' }, { letter: 'm', color: 'blue' }]);
-		this.keys.push([{ letter: 'back', color: 'blue' }, { letter: 'w', color: 'blue' }, { letter: 'x', color: 'blue' }, { letter: 'c', color: 'blue' },
-		{ letter: 'v', color: 'blue' }, { letter: 'b', color: 'blue' }, { letter: 'n', color: 'blue' }, { letter: 'enter', color: 'blue' }]);
+		this.keys.push('azertyuiop'.split('').map(e => { return { letter: e, color: 'blue' } }));
+		this.keys.push('qsdfghjklm'.split('').map(e => { return { letter: e, color: 'blue' } }));
+		this.keys.push('back,w,x,c,v,b,n,enter'.split(',').map(e => { return { letter: e, color: 'blue' } }));
 	}
 
 	public ngOnInit(): void {
