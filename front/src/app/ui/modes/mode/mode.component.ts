@@ -9,6 +9,8 @@ import { DialogWinComponent } from '../../dialog/dialog-win';
 import { IKey } from 'src/app/models';
 
 const DEFAULT_NB_ROWS = 6;
+const NO_WORD_FOUND_ERROR_MSG = 'Ce mot n\'existe pas dans le dictionnaire de Wordus';
+const WORD_TOO_SHORT_MSG = 'Veuillez saisir un mot de {} lettres';
 
 @Component({
 	selector: 'app-mode',
@@ -21,7 +23,10 @@ export class AModeComponent implements OnInit {
 	public nbRows: number;
 	public wordGridViewModel: WordGridViewModel;
 	public keys: Array<Array<IKey>>;
-	public displayNoWordFoundMsg: boolean;
+	public displayErrorMsg: boolean;
+	public errorMsg: string;
+	public noWordFoundMsg: string;
+	public wordTooShortMsg: string;
 
 	constructor(
 		protected wordsService: WordsService,
@@ -38,7 +43,8 @@ export class AModeComponent implements OnInit {
 		this.keys.push('qsdfghjklm'.split('').map(e => { return { letter: e, color: 'blue' } }));
 		this.keys.push('back,w,x,c,v,b,n,enter'.split(',').map(e => { return { letter: e, color: 'blue' } }));
 
-		this.displayNoWordFoundMsg = false;
+		this.displayErrorMsg = false;
+		this.errorMsg = '';
 	}
 
 	public ngOnInit(): void {
@@ -49,16 +55,20 @@ export class AModeComponent implements OnInit {
 			if (this.wordGridViewModel.currentWord() === this.word) {
 				this.wordGridViewModel.sendKey(event);
 			} else {
-				let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
-				checkWord.subscribe(
-					exists => {
-						if (exists) {
-							this.wordGridViewModel.sendKey(event);
-						} else {
-
+				if (this.wordGridViewModel.currentWord().split('.').join('').length !== this.word.length) {
+					this.showErrorMsg(WORD_TOO_SHORT_MSG.replace('{}', this.word.length.toString()));
+				} else {
+					let checkWord = this.wordsService.checkWord(this.wordGridViewModel.currentWord());
+					checkWord.subscribe(
+						exists => {
+							if (exists) {
+								this.wordGridViewModel.sendKey(event);
+							} else {
+								this.showErrorMsg(NO_WORD_FOUND_ERROR_MSG);
+							}
 						}
-					}
-				);
+					);
+				}
 			}
 		} else if (event === 'backspace') {
 			this.wordGridViewModel.sendKey('back');
@@ -66,6 +76,15 @@ export class AModeComponent implements OnInit {
 		else {
 			this.wordGridViewModel.sendKey(event);
 		}
+	}
+
+	public showErrorMsg(errorMsg: string) {
+		this.errorMsg = errorMsg;
+		this.displayErrorMsg = true;
+		setTimeout(() => {
+			this.displayErrorMsg = false;
+			this.errorMsg = '';
+		}, 2000);
 	}
 
 	public statusChange(event: any): void {
