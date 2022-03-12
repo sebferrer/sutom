@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { IKey } from 'src/app/models';
 
 @Component({
 	selector: 'app-keyboard',
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class KeyboardComponent implements OnInit {
 
 	@Input()
-	public keys: Array<Array<string>>;
+	public keys: Array<Array<IKey>>;
 
 	@Output()
 	public keyPressed = new EventEmitter();

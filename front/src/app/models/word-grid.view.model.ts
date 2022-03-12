@@ -8,7 +8,7 @@ const SOUND_TIME_INTERVAL = 500;
 export class WordGridViewModel {
 
     public readonly grid: Array<Array<ILetter>>;
-    public readonly nbLetters: number;
+    public nbLetters: number;
     public readonly firstLetter: string;
     public currentRow: number;
     public currentColumn: number;
@@ -33,6 +33,7 @@ export class WordGridViewModel {
 
     constructor(word: string, nbRows: number, isSpontz?: boolean) {
         this.word = word;
+        this.nbLetters = word.length;
         this.nbRows = nbRows;
         this.timeCounter = 0;
         this.locked = false;
@@ -210,7 +211,6 @@ export class WordGridViewModel {
                 }
             }
         }
-        console.log(this.progression);
     }
 
     public nextColumn(): void {

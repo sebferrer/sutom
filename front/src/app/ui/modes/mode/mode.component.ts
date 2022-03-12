@@ -21,6 +21,7 @@ export class AModeComponent implements OnInit {
 	public nbRows: number;
 	public wordGridViewModel: WordGridViewModel;
 	public keys: Array<Array<IKey>>;
+	public displayNoWordFoundMsg: boolean;
 
 	constructor(
 		protected wordsService: WordsService,
@@ -29,8 +30,6 @@ export class AModeComponent implements OnInit {
 	) {
 		const cypheredWord = this.route.snapshot.paramMap.get('aesword');
 
-		console.log(decrypt(cypheredWord));
-
 		this.word = decrypt(cypheredWord);
 		this.nbRows = this.nbRows == null ? DEFAULT_NB_ROWS : this.nbRows;
 
@@ -38,6 +37,8 @@ export class AModeComponent implements OnInit {
 		this.keys.push('azertyuiop'.split('').map(e => { return { letter: e, color: 'blue' } }));
 		this.keys.push('qsdfghjklm'.split('').map(e => { return { letter: e, color: 'blue' } }));
 		this.keys.push('back,w,x,c,v,b,n,enter'.split(',').map(e => { return { letter: e, color: 'blue' } }));
+
+		this.displayNoWordFoundMsg = false;
 	}
 
 	public ngOnInit(): void {
@@ -53,6 +54,8 @@ export class AModeComponent implements OnInit {
 					exists => {
 						if (exists) {
 							this.wordGridViewModel.sendKey(event);
+						} else {
+
 						}
 					}
 				);
@@ -73,7 +76,7 @@ export class AModeComponent implements OnInit {
 		}
 	}
 
-	public openWinDialog() {
+	public openWinDialog(): void {
 		this.dialog.open(DialogWinComponent, {
 			autoFocus: false,
 			width: '20rem',
@@ -89,7 +92,7 @@ export class AModeComponent implements OnInit {
 		});
 	}
 
-	public openLoseDialog() {
+	public openLoseDialog(): void {
 		this.dialog.open(DialogInfoComponent, {
 			autoFocus: false,
 			width: '20rem',
@@ -105,7 +108,7 @@ export class AModeComponent implements OnInit {
 		});
 	}
 
-	public endRow(colorMap: any) {
+	public endRow(colorMap: any): void {
 		for (let i = 0; i < this.keys.length; i++) {
 			for (let j = 0; j < this.keys[i].length; j++) {
 				if (this.keys[i][j].letter !== 'enter' && this.keys[i][j].letter !== 'back') {
@@ -121,11 +124,10 @@ export class AModeComponent implements OnInit {
 				}
 			}
 		}
-		console.log(this.keys);
 	}
 
 	@HostListener('document:keydown', ['$event'])
-	handleKeyboardEvent(event: KeyboardEvent) {
+	handleKeyboardEvent(event: KeyboardEvent): void {
 		const key = event.key;
 		if (!/^([a-zA-Z])$/.test(key) && key !== 'Enter' && key !== 'Backspace') {
 			return;

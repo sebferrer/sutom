@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 				if (nb < 5) {
 					this.output = "Vous ne pouvez pas choisir ce mot, il doit être possible à deviner (il doit y avoir au moins 5 autres mots commençants par la même lettre et contenant le même nombre de lettres dans le dictionnaire).";
 				} else {
-					const url = "https://wordus.fr/#/" + encrypt(this.word) + "/";
+					const url = "http://localhost:4200/#/" + encrypt(this.word) + "/";
 					this.output = "Voici votre Wordus: <a href=\"" + url + "\">" + url + "</a>";
 				}
 			}
